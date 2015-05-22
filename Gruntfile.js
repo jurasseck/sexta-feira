@@ -58,6 +58,6 @@ grunt.loadNpmTasks('grunt-contrib-clean');
 grunt.loadNpmTasks('grunt-contrib-htmlmin');
 
 grunt.registerTask('default', ['clean', 'concat', 'uglify', 'htmlmin']);
-grunt.registerTask('server', [ 'express:dev', 'watch' ]);
+grunt.registerTask('dev', [ 'express:dev', 'watch' ]);
 
 };
