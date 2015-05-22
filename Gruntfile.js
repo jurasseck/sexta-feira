@@ -11,21 +11,53 @@ module.exports = function(grunt) {
     uglify: {
       dist: {
         files: {
-          'dist/build.min.js': ['dist/build.js']
+          'dist/js/build.min.js': ['dist/js/build.js']
         }
       }
     },
-    clean:{
-      dist:{
-        src: 'dist/'
+    htmlmin: {                                       // Task
+        dist: {                                      // Target
+          options: {                                 // Target options
+            removeComments: true,
+            collapseWhitespace: true
+          },
+          files: {                                   // Dictionary of files
+            'dist/index.html': 'client/index.html',     // 'destination': 'source'
+            'dist/partials/list.html': 'client/partials/list.html'
+          }
+        }
+      },
+      clean:{
+        dist:{
+          src: 'dist/'
+        }
+      },
+      express: {
+        dev: {
+          options: {
+            script: 'app.js'
+          }
+        }
+      },
+      watch: {
+        express: {
+          files:  [ 'server/**/*.js' ],
+          tasks:  [ 'express:dev' ],
+          options: {
+          spawn: false // for grunt-contrib-watch v0.5.0+, "nospawn: true" for lower versions. Without this option specified express won't be reloaded
+        }
       }
     }
   });
 
-  grunt.loadNpmTasks('grunt-contrib-concat');
-  grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-contrib-clean');
+grunt.loadNpmTasks('grunt-express-server');
+grunt.loadNpmTasks('grunt-contrib-watch');
+grunt.loadNpmTasks('grunt-contrib-concat');
+grunt.loadNpmTasks('grunt-contrib-uglify');
+grunt.loadNpmTasks('grunt-contrib-clean');
+grunt.loadNpmTasks('grunt-contrib-htmlmin');
 
-  grunt.registerTask('default', ['clean', 'concat', 'uglify']);
+grunt.registerTask('default', ['clean', 'concat', 'uglify', 'htmlmin']);
+grunt.registerTask('server', [ 'express:dev', 'watch' ]);
 
 };
