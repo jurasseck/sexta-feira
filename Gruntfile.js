@@ -1,7 +1,7 @@
 module.exports = function(grunt) {
 
   grunt.initConfig({
-    // pkg: grunt.file.readJSON('package.json'),
+    pkg: grunt.file.readJSON('package.json'),
     concat: {
       dist: {
         src: ['client/js/app.js','client/js/controllers.js','client/js/services.js'],
