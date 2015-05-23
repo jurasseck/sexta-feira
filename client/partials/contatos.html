@@ -1,0 +1,24 @@
+<div>
+	<h1>Listagem de contatos </h1>
+
+	<a ng-href="#/contato">Novo</a>
+
+	<table class="table table-stripped table-hover">
+		<tr>
+			<th>Nome</th>
+			<th>Email</th>
+			<th>Telefone</th>
+			<th>#</th>
+		</tr>
+		<tr ng-repeat="contato in contatos">
+			<td>{{contato.nome}}</td>
+			<td>{{contato.email}}</td>
+			<td>{{contato.telefone}}</td>
+			<td>
+				<a ng-href="#/contato/{{contato._id}}">Editar</a>
+				-
+				<button ng-click="apagar(contato)">Remover</button>
+			</td>
+		</tr>
+	</table>
+</div>
